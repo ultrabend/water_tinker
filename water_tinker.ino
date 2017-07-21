@@ -16,8 +16,8 @@ void setup() {
   
   Serial.begin(9600);
   inputString.reserve(200);
-  Serial.println("Initialisation");
-  Serial.println("en attente de la commande : 1 = lancement, 2 = stop");
+  Serial.println("Init");
+  Serial.println("waiting for command : 1 = go, 2 = stop");
 }
 
 void loop() {
@@ -27,22 +27,21 @@ void loop() {
           i++;
           Serial.print("mesure n°");
           Serial.print(i);
-          Serial.println(" lancée");
+          Serial.println(" in progress");
           previousMillis = millis();
           stringComplete = false;
           ordre=0;
           goMesure = true;
           break;
         case 2:
-          //Serial.println("\n");
-          Serial.println("mesure arretée");
+          Serial.println("mesure stopped");
           stringComplete = false;
           ordre = 0;
           goMesure = false;
           eau0=false,eau1=false,eau2=false,eau3=false,eau4 = false;
           break;
        default:
-          Serial.println("commande inconnue");
+          Serial.println("unknow command");
           stringComplete = false;
           ordre = 0;
        break;
@@ -93,13 +92,12 @@ void mesures() {
   void resultats(int x) {
     switch (x) {
       case 0:
-      //Serial.println(eau0);
        if(eau0 == false) {
         currentMillis = millis();
         result0 = (currentMillis - previousMillis)/1000;
-        Serial.print(" Detection d'eau capteur 0, temps: ");
+        Serial.print(" Water on sensor 0, time: ");
         Serial.print(result0);
-        Serial.println(" secondes");
+        Serial.println(" sec");
         eau0=true;
          }
       break;
@@ -108,11 +106,10 @@ void mesures() {
       if(eau1 == false) {
         currentMillis = millis();
         result1 = (currentMillis - previousMillis)/1000;
-        Serial.print(" Detection d'eau capteur 1, temps: ");
+        Serial.print(" Water on sensor 1, time: ");
         Serial.print(result1);
-        Serial.println(" secondes");
+        Serial.println(" sec");
         eau1=true;
-        //Serial.println(eau1);
         }
       break;
       
@@ -120,9 +117,9 @@ void mesures() {
         if(eau2 == false) {
         currentMillis = millis();
         result2 = (currentMillis - previousMillis)/1000;
-        Serial.print(" Detection d'eau capteur 2, temps: ");
+        Serial.print(" Water on sensor 2, time: ");
         Serial.print(result2);
-        Serial.println(" secondes");
+        Serial.println(" sec");
         eau2=true;
         }
 
@@ -132,9 +129,9 @@ void mesures() {
         if(eau3 == false) {
         currentMillis = millis();
         result3 = (currentMillis - previousMillis)/1000;
-        Serial.print(" Detection d'eau capteur 3, temps: ");
+        Serial.print(" Water on sensor 3, time: ");
         Serial.print(result3);
-        Serial.println(" secondes");
+        Serial.println(" sec");
         eau3=true;
         }
       break;
@@ -143,9 +140,9 @@ void mesures() {
         if(eau4 == false) {
         currentMillis = millis();
         result4 = (currentMillis - previousMillis)/1000;
-        Serial.print(" Detection d'eau capteur 4, temps: ");
+        Serial.print(" Water on sensor 4, time: ");
         Serial.print(result4);
-        Serial.println(" secondes");
+        Serial.println(" sec");
         eau4=true;
         }
       break;      
